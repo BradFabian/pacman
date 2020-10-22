@@ -114,6 +114,7 @@ function control(e) {
     squares[pacmanCurrentIndex].classList.add('pacman');
     pacDotEaten();
     powerPelletEaten();
+    checkForGameOver();
 }
 
 document.addEventListener('keyup', control);
@@ -229,3 +230,22 @@ function moveGhost(ghost) {
 
 }
 
+
+// check for game over 
+
+function checkForGameOver(){
+    // if the square pacman is in contains a ghost and the square does not cotain a scared ghost
+    if(squares[pacmanCurrentIndex].classList.contains('ghost') && !squares[pacmanCurrentIndex].classList.contains('scared-ghost')){
+        // for each ghost - we need to stop it moving
+        ghosts.forEach(ghost => {
+           ghost.currentIndex = ghost.currentIndex
+           ghost.speed = 0;
+        })
+    // remove eventlistener from our control function
+        document.removeEventListener('keyup', control);
+    // tell user the game is over
+        alert('Game is over!');
+    }
+    
+
+}
