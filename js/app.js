@@ -114,8 +114,8 @@ function control(e) {
     squares[pacmanCurrentIndex].classList.add('pacman');
     pacDotEaten();
     powerPelletEaten();
-    checkForWin();
     checkForGameOver();
+    checkForWin();
 }
 
 document.addEventListener('keyup', control);
