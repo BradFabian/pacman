@@ -1,6 +1,11 @@
 const width = 28
 const grid = document.querySelector('.grid');
 const scoreDisplay = document.querySelector('#score');
+const ghost_character = document.querySelectorAll('.ghost_character');
+const pacman_mouth = document.querySelector('.pacman__mouth')
+
+
+
 let squares = [];
 let score = 0;
 
@@ -202,6 +207,8 @@ function moveGhost(ghost) {
             // remove ghost class
         squares[ghost.currentIndex].classList.remove(ghost.className)
         squares[ghost.currentIndex].classList.remove('ghost', 'scared-ghost')
+        pacman_mouth.classList.remove('pacman_mouth_animation')
+        ghost_character.forEach(scaredGhost => scaredGhost.classList.remove('ghost_animation'));
         // add direction to current Index
         ghost.currentIndex += direction
         // add ghost class
@@ -213,12 +220,17 @@ function moveGhost(ghost) {
 
         if(ghost.isScared) {
             squares[ghost.currentIndex].classList.add('scared-ghost')
+            pacman_mouth.classList.add('pacman_mouth_animation')
+            ghost_character.forEach(scaredGhost => scaredGhost.classList.add('ghost_animation'));
+            
+
         }
 
         // if the ghost is current scared and pacman is on it
         if(ghost.isScared && squares[ghost.currentIndex].classList.contains('pacman')){
             // remove classnames - 
             squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
+            
         // change ghosts currentindex back to startindex
             ghost.currentIndex = ghost.startIndex
         // add a scroe of 100
@@ -262,3 +274,4 @@ function checkForWin(){
         scoreDisplay.innerHTML = `You Won!`
     }
 }
+
