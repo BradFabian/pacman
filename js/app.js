@@ -1,8 +1,10 @@
 const width = 28
 const grid = document.querySelector('.grid');
 const scoreDisplay = document.querySelector('#score');
-const ghost_character = document.querySelectorAll('.ghost_character');
-const pacman_mouth = document.querySelector('.pacman__mouth')
+const ghostCharacter = document.querySelectorAll('.ghost_character');
+const pacmanMouth = document.querySelector('.pacman__mouth');
+const restartButton = document.getElementById('restart');
+
 
 
 
@@ -124,6 +126,7 @@ function control(e) {
 }
 
 document.addEventListener('keyup', control);
+restartButton.addEventListener('click', restartGame);
 
 function pacDotEaten() {
     if (squares[pacmanCurrentIndex].classList.contains('pac-dot')){
@@ -207,8 +210,8 @@ function moveGhost(ghost) {
             // remove ghost class
         squares[ghost.currentIndex].classList.remove(ghost.className)
         squares[ghost.currentIndex].classList.remove('ghost', 'scared-ghost')
-        pacman_mouth.classList.remove('pacman_mouth_animation')
-        ghost_character.forEach(scaredGhost => scaredGhost.classList.remove('ghost_animation'));
+        pacmanMouth.classList.remove('pacman_mouth_animation')
+        ghostCharacter.forEach(scaredGhost => scaredGhost.classList.remove('ghost_animation'));
         // add direction to current Index
         ghost.currentIndex += direction
         // add ghost class
@@ -220,8 +223,8 @@ function moveGhost(ghost) {
 
         if(ghost.isScared) {
             squares[ghost.currentIndex].classList.add('scared-ghost')
-            pacman_mouth.classList.add('pacman_mouth_animation')
-            ghost_character.forEach(scaredGhost => scaredGhost.classList.add('ghost_animation'));
+            pacmanMouth.classList.add('pacman_mouth_animation')
+            ghostCharacter.forEach(scaredGhost => scaredGhost.classList.add('ghost_animation'));
             
 
         }
@@ -254,6 +257,8 @@ function checkForGameOver(){
         ghosts.forEach(ghost => clearInterval(ghost.timerId))
     // remove eventlistener from our control function
         document.removeEventListener('keyup', control);
+    // display restart button
+    restartButton.style.visibility = 'visible';
     // tell user the game is over
     scoreDisplay.innerHTML = 'You LOSE'
     }
@@ -270,8 +275,20 @@ function checkForWin(){
         // remove the event listener
         document.removeEventListener('keyup', control);
 
+        // display restart button
+    restartButton.style.visibility = 'visible';
+
         // tell our user we have won
         scoreDisplay.innerHTML = `You Won!`
     }
+}
+
+// Restart Game 
+
+function restartGame() {
+    window.location.reload();
+    
+  
+
 }
 
