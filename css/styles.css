@@ -110,6 +110,24 @@ button:focus {
   }
 }
 
+footer {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  padding: 1rem;
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+  font-family: inherit;
+  letter-spacing: 0.3em;
+}
+
+footer a:hover {
+  color: pink;
+}
+
 #score {
   color: pink;
 }
